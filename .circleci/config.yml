@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/relapse/angular/loan-app
+    working_directory: ~/loan-app
     docker:
       - image: circleci/node:10-browsers
     steps:
