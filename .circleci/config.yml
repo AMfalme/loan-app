@@ -6,8 +6,6 @@ jobs:
     working_directory: ~/my-project
     docker:
       - image: cimg/node:16.10-browsers
-        environment:
-          - CHROME_BIN=/usr/bin/google-chrome
     steps:
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
