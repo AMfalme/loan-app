@@ -7,6 +7,8 @@ jobs:
     docker:
       - image: cimg/node:16.10-browsers
     steps:
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - checkout
       - restore_cache:
           key: my-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
