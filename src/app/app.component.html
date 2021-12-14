@@ -106,7 +106,6 @@ body{
   <div class="top-menu"> 
 
   </div>
-  <mat-slider min="1" max="100" step="1" value="50"></mat-slider>
   <div>
     <h3 class="logIn">
       Home loan Application
@@ -117,11 +116,13 @@ body{
   </div>
   <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Smart-ID">Content 1</mat-tab>
-    <mat-tab label="">Content 2</mat-tab>
-    <mat-tab label="Third">Content 3</mat-tab>
+    <mat-tab label="Biometric">Content 2</mat-tab>
+    <mat-tab label="Pin-Generator">Content 3</mat-tab>
   </mat-tab-group>
   <title>Home loan - Swedbank </title>
   <span>{{ title }} app is running!</span>
+
+  <app-loan-form></app-loan-form>
 
 </div>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
