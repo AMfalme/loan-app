@@ -1,13 +1,25 @@
+
+.loan-form{
+    width: 100%;
+    min-width: 600px;
+    mat-form-field.mat-form-field{
+        width: 100%;
+    }
+}
 .example-container{
-    text-align: center
+    text-align: center;
 }
 
 .form-container{
     width: 400 px; 
     margin: 0 px auto; 
-    margin-top: 200 px
+    margin-top: 200 px;
 }
 
 .form-field{
-    display: block
+    display: block;
 }
+.example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+  }

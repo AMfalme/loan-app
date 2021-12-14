@@ -1,0 +1,51 @@
+$mat-blue-grey:rgb(60, 60, 104);
+$loan-app-orange: rgb(155, 139, 109);
+$my-app-primary: mat-palette($mat-blue-grey);
+$my-app-accent:  mat-palette($loan-app-orange, 500, 900, A100);
+
+
+$title-text-color: #257886;
+// $my-app-warn:    mat-palette($mat-deep-orange);
+// $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+// @include angular-material-theme($my-app-theme);
+
+
+
+
+.mat-form-field-appearance-outline .mat-form-field-outline{
+    border: 1px solid #bcd8db;
+    border-radius: 4px;
+}
+.mat-select-value{
+    color: grey;
+}
+
+::placeholder{
+    color: grey;
+}
+.mat-select-arrow {
+    color: rgb(26 0 0 / 70%);
+}
+.mat-form-field-type-mat-label {
+    color: slategray;
+}
+.mat-form-field {
+    .input-label{
+        color: black;
+    }
+    .mat-input-element {
+        color: #512b2b;
+    }
+    .mat-form-field-type-mat-label {
+        color: slategray;
+    }
+    .mat-form-field-underline {
+        background-color: slategray;
+    }
+    .mat-form-field-ripple {
+        background-color: slategray;
+    }
+    .mat-form-field-required-marker {
+        color: slategray;
+    }
+}
