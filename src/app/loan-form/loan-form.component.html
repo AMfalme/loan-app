@@ -1,29 +1,32 @@
 <div class="loan-form">
 
-    <mat-stepper #stepper>
+    <mat-stepper #stepper [linear]>
         <mat-step [stepControl]="loanForm">
             
-            <form [formGroup]="loanForm" (submit)="clickNext()">
+            <form [formGroup]="loanForm">
                 <ng-template matStepLabel>Loan Application</ng-template>
                 <p>
                     <mat-form-field appearance="outline">
                         <mat-label class="input-label">Loan Purpose</mat-label>
-                        <mat-select formControlName="loanType" name="loanType">
+                        <mat-select (selectionChange)="onSelectLoanType($event)" formControlName="loanType" name="loanType">
                                 <mat-option>--</mat-option>
                 
                                 <mat-option *ngFor="let loan of loanOptions" [value]="loan">
                                 {{loan}}
                                 </mat-option>
                         </mat-select>
+                        <mat-error *ngIf="loanForm.controls['loanType']?.touched && loanForm.controls['loanType']?.invalid">
+                            <span *ngIf="loanForm.controls['loanType']?.errors ">
+                                This field is mandatory.
+                            </span>
+                            <span *ngIf="loanForm.controls['loanType']?.errors">This field is invalid.</span>
+                        </mat-error>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field appearance="outline" floatLabel="always">
                         <mat-label class="input-label">Loan term</mat-label>
                         <input matInput type="number" formControlName="loanPeriod" placeholder="Placeholder">
-                        <span matPrefix>$&nbsp;</span>
-                        <span matSuffix>.00</span>
-                        <mat-hint>Hint</mat-hint>
                     </mat-form-field>
                 </p>
                 <p>
@@ -32,11 +35,13 @@
                             How much money do you have for down payment? 
                         </mat-label>
                         <input matInput formControlName="downPaymentAmount" type="number" required>
-                        <mat-error *ngIf="loanForm.controls['email']?.touched && loanForm.controls['email']?.invalid">
-                            <span *ngIf="loanForm.controls['email']?.errors ">
+                        <span matPrefix>$&nbsp;</span>
+                        <span matSuffix>.00</span>
+                        <mat-error *ngIf="loanForm.controls['downPaymentAmount']?.touched && loanForm.controls['downPaymentAmount']?.invalid">
+                            <span *ngIf="loanForm.controls['downPaymentAmount']?.errors ">
                                 This field is mandatory.
                             </span>
-                            <span *ngIf="loanForm.controls['email']?.errors">This field is invalid.</span>
+                            <span *ngIf="loanForm.controls['downPaymentAmount']?.errors">This field is invalid.</span>
                         </mat-error>
                     </mat-form-field>
                 </p>
@@ -54,17 +59,7 @@
                         </mat-error>
                     </mat-form-field>
                 </p>
-                <!-- <p>
-
-                    <mat-form-field class="form-field" appearance="outline">
-                        <mat-label class="input-label"> Password
-                        </mat-label>
-                        <input matInput formControlName="password" type="outline">
-                        <mat-error *ngIf="loanForm.controls['password']?.touched && loanForm.controls['password']?.invalid">
-                            <span *ngIf="loanForm.controls['password']?.errors">This field is mandatory.</span>
-                        </mat-error>
-                    </mat-form-field>
-                </p> -->
+                
                     <div>
                         <button mat-button matStepperNext>Next</button>
                     </div>
@@ -175,35 +170,34 @@
                 </p>
 
                 </div>
-                <div formGroupName="coApplicant">
+                <div formGroupName="coApplicants">
                     <div class="example-button-container">
-                        <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon">
+                        <button mat-stroked-button color="accent" aria-label="Example icon button with a plus one icon">
                           <mat-icon>plus_one</mat-icon>
                             <span>Add Co-Applicant</span>
                         </button>
                       </div>
-                    <p>
+                    <div formArrayName="coApplicants" *ngFor="let applicant in coApplicants.control;
+                      let i=index"
+                    >
                         <mat-form-field class="form-field" appearance="outline">
                             <mat-label class="input-label"> 
                                 Co Applicant
                             </mat-label>
-                            <input matInput formControlName="applicant" required>
-                            <mat-error *ngIf="loanForm.controls['applicant']?.touched && loanForm.controls['email']?.invalid">
-                                <span *ngIf="loanForm.controls['applicant']?.errors ">
-                                    This field is mandatory.
-                                </span>
-                                <span *ngIf="loanForm.controls['applicant']?.errors">This field is invalid.</span>
-                            </mat-error>
+                            <input matInput formControlName="i" required>
+                            
                         </mat-form-field>
-                    </p>applicant
+                    </div>
                 </div>
                 <div>
                     <button mat-button matStepperPrevious>Back</button>
                     <button mat-button matStepperNext>Next</button>
                   </div>
             </form>
+            <button mat-button (click)="submitLoanForm()">Submit</button>
+        
         </mat-step>
-        <mat-step [stepControl]="incomeFormGroup">
+        <!-- <mat-step [stepControl]="incomeFormGroup">
             
             <form [formGroup]="incomeFormGroup" >
                 <ng-template matStepLabel>Income</ng-template>
@@ -227,7 +221,8 @@
                     <button mat-button (click)="stepper.reset()">Reset</button>
                   </div>
             </form>
-        </mat-step>
+        </mat-step> -->
+                  
     </mat-stepper>
 
 </div>

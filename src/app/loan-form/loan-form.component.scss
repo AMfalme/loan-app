@@ -2,8 +2,21 @@
 .loan-form{
     width: 100%;
     min-width: 600px;
+    
+    mat-stepper{ 
+        background-color: transparent;
+    }
+    mat-step-header .mat-step-label{
+        color: #257886;
+    }
+    mat-step-header .mat-step-label.mat-step-label-active{
+        color: #257886;
+    }
     mat-form-field.mat-form-field{
         width: 100%;
+    }
+    .mat-step-header .mat-step-label.mat-step-label-active{
+        color: #257886 !important;
     }
 }
 .example-container{
