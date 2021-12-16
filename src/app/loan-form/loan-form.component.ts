@@ -1,14 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
 
-
-export interface LoanType {
-  loanType: string,
-  loanTypeId: number
-}
 
 export interface CoApplicant {
   firstName: string,
@@ -41,6 +34,8 @@ export class LoanFormComponent implements OnInit {
 
   });
 
+  dynamicFormGroup: FormArray = new FormArray([]);
+
   
 
   
@@ -52,7 +47,9 @@ export class LoanFormComponent implements OnInit {
     'Home Exchange',
     'Housing renovation or repair',
     'Change in loan agreement'  
-];
+  ];
+
+  loanPeriod : number [] = Array.from(Array(30).keys())
   coApplicants: CoApplicant[] = [];
   get CoApplicants (): FormArray {
     return this.personalDataForm.get('coApplicants') as FormArray;
@@ -64,18 +61,20 @@ export class LoanFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+    console.log(this.dynamicFormGroup);
+      
     this.loanForm = this.formBuilder.group({
       loanType: [null, [Validators.required, ]],
       loanPeriod: [null, Validators.required],
       downPaymentAmount: [null, Validators.required],
       loanAmount: [null, Validators.required],
-  
+      dynamicFormGroup: this.formBuilder.array([])
+      
     });
     
     this.personalDataForm = this.formBuilder.group({
-      firstName: [null, [Validators.required, ]],
-      lastName: [null, [Validators.required, ]],
+      firstName: ['', [Validators.required, ]],
+      lastName: ['', [Validators.required, ]],
       personalCode: [null, [Validators.required, ]],
       maritalStatus: [null, [Validators.required, ]],
       familyDependants: [null, [Validators.required, ]],
@@ -93,6 +92,14 @@ export class LoanFormComponent implements OnInit {
       }),
       });
   }
+
+  createDynamicFormGroup(): FormGroup {
+    return this.formBuilder.group({
+      purpose: ['', Validators.required],
+      propertyDetails: ['', Validators.required]
+    });
+  }
+
   submitLoanForm() {
     if (!this.loanForm.valid) {
 
@@ -103,10 +110,18 @@ export class LoanFormComponent implements OnInit {
     }
     console.log(this.loanForm.value);
   }
-
+  get dynamicForms () {
+    return this.loanForm.get('dynamicFormGroup') as FormArray;
+  }
   onSelectLoanType(e: any) {
     if (e.value == 'Housing Purchasing') {
-      this.loanForm.addControl('new', new FormControl('', Validators.required));
+    this.dynamicForms.push(
+        this.createDynamicFormGroup()
+      );
+      // let item = this.loanForm.get('additional')?.value[0];
+      console.log( this.dynamicForms);
+      console.log(this.dynamicFormGroup);
+      
     } 
   }
 
