@@ -23,13 +23,24 @@
                         </mat-error>
                     </mat-form-field>
                 </p>
-                <div formArrayName="dynamicFormGroup">
+                <div formArrayName="dynamicFormGroup" *ngFor="let loan of dynamicForms.controls;let i = index;">
                
-                    <p  *ngFor="let loan of dynamicForms.controls;let i = index;">
-                        <mat-form-field  appearance="outline">
+                    <p [formGroupName]="i">
+                        <mat-form-field   appearance="outline">
                             <mat-label class="input-label">Purpose more precisely</mat-label>
-                            <input matInput formControlName={{i}} type="number" required>
-                            {{loan.value}}
+                            <input matInput formControlName="purpose" type="text" required>
+                            
+                            <!-- <mat-error *ngIf="loanForm.controls['loanType']?.touched && loanForm.controls['loanType']?.invalid">
+                                <span *ngIf="loanForm.controls['loanType']?.errors ">
+                                    This field is mandatory.
+                                </span>
+                                <span *ngIf="loanForm.controls['loanType']?.errors">This field is invalid.</span>
+                            </mat-error> -->
+                        </mat-form-field>
+                        <mat-form-field  appearance="outline">
+                            <mat-label class="input-label">Property Details</mat-label>
+                            <input matInput formControlName="purpose" type="text" required>
+                            
                             <!-- <mat-error *ngIf="loanForm.controls['loanType']?.touched && loanForm.controls['loanType']?.invalid">
                                 <span *ngIf="loanForm.controls['loanType']?.errors ">
                                     This field is mandatory.

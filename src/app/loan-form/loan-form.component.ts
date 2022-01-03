@@ -114,13 +114,27 @@ export class LoanFormComponent implements OnInit {
     return this.loanForm.get('dynamicFormGroup') as FormArray;
   }
   onSelectLoanType(e: any) {
-    if (e.value == 'Housing Purchasing') {
-    this.dynamicForms.push(
-        this.createDynamicFormGroup()
-      );
-      // let item = this.loanForm.get('additional')?.value[0];
-      console.log( this.dynamicForms);
-      console.log(this.dynamicFormGroup);
+    switch(e.value) {
+      case 'Housing Purchasing':
+        this.dynamicForms.push(
+          this.createDynamicFormGroup()
+        );
+        break;
+      case 'House Construction':
+        this.dynamicForms.push(
+          this.createDynamicFormGroup()
+        );
+        break;
+      case 'Exploring Laon possibilities':
+        // let item = this.loanForm.get('additional')?.value[0];
+        console.log( this.dynamicForms);
+        break;
+      case 'Purchasing of land plot':
+        console.log(this.dynamicFormGroup);
+        break;
+      case 'Home Exchange':
+      case 'Housing renovation or repair':
+      case 'Change in loan agreement':
       
     } 
   }
