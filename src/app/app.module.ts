@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoanFormComponent } from './loan-form/loan-form.component';
 
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonModule} from '@angular/material/button';
@@ -16,7 +15,9 @@ import {MatIconModule} from '@angular/material/icon';
 import { SelectFormFieldComponent } from './select-form-field/select-form-field.component';
 import { CustomErrorComponentComponent } from './custom-error-component/custom-error-component.component';
 
-
+import { LoanFormComponent } from './loan-form/loan-form.component';
+import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
+import { DynamicFormQuestionComponent } from './dynamic-form-question/dynamic-form-question.component';
 
 
 
@@ -25,7 +26,9 @@ import { CustomErrorComponentComponent } from './custom-error-component/custom-e
     AppComponent,
     LoanFormComponent,
     SelectFormFieldComponent,
-    CustomErrorComponentComponent
+    CustomErrorComponentComponent,
+    DynamicFormComponent,
+    DynamicFormQuestionComponent
   ],
   imports: [
     BrowserModule,

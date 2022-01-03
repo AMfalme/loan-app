@@ -72,7 +72,8 @@ export class LoanFormComponent implements OnInit {
     'Purchasing of land plot',
     // 'Home Exchange',
     'Housing renovation or repair',
-    // 'Change in loan agreement'  
+    'Other',
+    'Change in loan agreement'  
   ];
 
   loanPeriod : number [] = Array.from(Array(30).keys())
