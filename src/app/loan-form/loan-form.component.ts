@@ -39,26 +39,31 @@ export class LoanFormComponent implements OnInit {
   dynamicFormControlkeyValues!: Object;
 
   HousePurchaseFormGroup: Object = {
-      purpose: ['', Validators.required],
+      descrption: ['', Validators.required],
       propertyDetails: ['', Validators.required]
   };
   
   HouseConstructionFormGroup: Object = {
-      purpose: ['', Validators.required],
+      description: ['', Validators.required],
       purchasePrice: ['', Validators.required],
       propertyDetails: ['', Validators.required]
   };
   
+  LandPurchaseFormGroup: Object = {
+      description: ['', Validators.required],
+      purchasePrice: ['', Validators.required],
+      landDetails: ['', Validators.required]
+  };
 
   
   loanOptions: string[] = [
     'Housing Purchasing', 
     'House Construction', 
-    'Exploring Laon possibilities',
+    // 'Exploring Laon possibilities',
     'Purchasing of land plot',
-    'Home Exchange',
-    'Housing renovation or repair',
-    'Change in loan agreement'  
+    // 'Home Exchange',
+    // 'Housing renovation or repair',
+    // 'Change in loan agreement'  
   ];
 
   loanPeriod : number [] = Array.from(Array(30).keys())
@@ -139,20 +144,24 @@ export class LoanFormComponent implements OnInit {
       case 'Housing Purchasing':
         this.dynamicForms.push(
           this.createFormGroups(this.HousePurchaseFormGroup)
-          );
-          console.log(this.getControlsKeyValues);
-          this.getControlsKeyValues = Object.keys(this.HouseConstructionFormGroup);
-          break;
-      case 'House Construction':
-            this.dynamicForms.push(
-              this.createFormGroups(this.HouseConstructionFormGroup)
         );
+        this.getControlsKeyValues = Object.keys(this.HousePurchaseFormGroup);
         break;
-      case 'Exploring Laon possibilities':
-        // let item = this.loanForm.get('additional')?.value[0];
-        console.log( this.dynamicForms);
+      case 'House Construction':
+        this.dynamicForms.push(
+          this.createFormGroups(this.HouseConstructionFormGroup)
+        );
+        this.getControlsKeyValues = Object.keys(this.HouseConstructionFormGroup);
         break;
       case 'Purchasing of land plot':
+        this.dynamicForms.push(
+          this.createFormGroups(this.LandPurchaseFormGroup)
+          );
+          this.getControlsKeyValues = Object.keys(this.LandPurchaseFormGroup);
+          // let item = this.loanForm.get('additional')?.value[0];
+          console.log( this.LandPurchaseFormGroup);
+          break;
+      case 'Exploring Laon possibilities':
         console.log(this.dynamicFormGroup);
         break;
       case 'Home Exchange':

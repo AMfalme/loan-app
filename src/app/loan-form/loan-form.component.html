@@ -27,12 +27,12 @@
                    <div *ngIf="dynamicForms.controls" [formGroupName]="i">
 
                         <p *ngFor="let control of getControlsKeyValues">
-                    
+                            
                         <mat-form-field   appearance="outline" >
                                 
                                 <!-- {{value}} -->
-                                <mat-label class="input-label">Purpose more precisely</mat-label>
-                                <input matInput formControlName="purpose" type="text" required>
+                                <mat-label class="input-label">{{control}}</mat-label>
+                                <input matInput formControlName={{control}} type="text" required>
                             
                             <!-- <mat-error *ngIf="loanForm.controls['loanType']?.touched && loanForm.controls['loanType']?.invalid">
                                 <span *ngIf="loanForm.controls['loanType']?.errors ">
