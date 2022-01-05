@@ -1,0 +1,40 @@
+
+.loan-form{
+    width: 100%;
+    min-width: 600px;
+    
+    mat-stepper{ 
+        background-color: white;
+    }
+    mat-step-header .mat-step-label{
+        color: #257886;
+    }
+    mat-step-header .mat-step-label.mat-step-label-active{
+        color: #257886;
+    }
+    mat-form-field.mat-form-field{
+        width: 100%;
+    }
+    .mat-step-header .mat-step-label.mat-step-label-active{
+        color: #257886 !important;
+    }
+    // .dynamicFormGroup{
+    // }
+}
+.example-container{
+    text-align: center;
+}
+
+.form-container{
+    width: 400 px; 
+    margin: 0 px auto; 
+    margin-top: 200 px;
+}
+
+.form-field{
+    display: block;
+}
+.example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+  }

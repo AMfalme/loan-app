@@ -1,0 +1,238 @@
+<div class="loan-form">
+
+    <mat-stepper orientation="horizontal" linear>
+        <mat-step [stepControl]="loanForm">
+            
+            <form [formGroup]="loanForm">
+                <ng-template matStepLabel>Loan Application</ng-template>
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label class="input-label">Loan Purpose</mat-label>
+                        <mat-select (selectionChange)="onSelectLoanType($event)"  name="loanType">
+                                <mat-option>--</mat-option>
+                
+                                <mat-option *ngFor="let loan of loanOptions" [value]="loan">
+                                {{loan}}
+                                </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="loanForm.controls['loanType']?.touched && loanForm.controls['loanType']?.invalid">
+                            <span *ngIf="loanForm.controls['loanType']?.errors ">
+                                This field is mandatory.
+                            </span>
+                            <span *ngIf="loanForm.controls['loanType']?.errors">This field is invalid.</span>
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <div  class="dynamicFormGroup" formArrayName="dynamicFormGroup" *ngFor="let loan of dynamicForms.controls  | keyvalue; ;let i = index;">
+                   <div *ngIf="dynamicForms.controls" [formGroupName]="i">
+
+                        <p *ngFor="let control of getControlsKeyValues">
+                            
+                        <mat-form-field   appearance="outline" >
+                                
+                                <!-- {{value}} -->
+                                <mat-label class="input-label">{{control}}</mat-label>
+                                <input matInput formControlName={{control}} type="text" required>
+                            
+                            <!-- <mat-error *ngIf="loanForm.controls['loanType']?.touched && loanForm.controls['loanType']?.invalid">
+                                <span *ngIf="loanForm.controls['loanType']?.errors ">
+                                    This field is mandatory.
+                                </span>
+                                <span *ngIf="loanForm.controls['loanType']?.errors">This field is invalid.</span>
+                            </mat-error> -->
+                        </mat-form-field>
+                       
+                    
+                    </p>
+                </div>
+                </div>
+                <p>
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <mat-label class="input-label">Loan Period</mat-label><mat-select formControlName="loanPeriod" name="loanPeriod">
+                            <mat-option>--</mat-option>
+            
+                            <mat-option *ngFor="let year of loanPeriod" [value]="year">
+                                {{year}}
+                            </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="loanForm.controls['loanType']?.touched && loanForm.controls['loanType']?.invalid">
+                        <span *ngIf="loanForm.controls['loanType']?.errors ">
+                            This field is mandatory.
+                        </span>
+                        <span *ngIf="loanForm.controls['loanType']?.errors">This field is invalid.</span>
+                    </mat-error></mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label class="input-label"> 
+                            How much money do you have for down payment? 
+                        </mat-label>
+                        <input matInput formControlName="downPaymentAmount" type="number" required>
+                        <span matPrefix>$&nbsp;</span>
+                        <span matSuffix>.00</span>
+                        <mat-error *ngIf="loanForm.controls['downPaymentAmount']?.touched && loanForm.controls['downPaymentAmount']?.invalid">
+                            <span *ngIf="loanForm.controls['downPaymentAmount']?.errors ">
+                                This field is mandatory.
+                            </span>
+                            <span *ngIf="loanForm.controls['downPaymentAmount']?.errors">This field is invalid.</span>
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label class="input-label"> 
+                            Loan amount
+                        </mat-label>
+                        <input matInput formControlName="loanAmount" required>
+                        <mat-error *ngIf="loanForm.controls['email']?.touched && loanForm.controls['email']?.invalid">
+                            <span *ngIf="loanForm.controls['email']?.errors ">
+                                This field is mandatory.
+                            </span>
+                            <span *ngIf="loanForm.controls['email']?.errors">This field is invalid.</span>
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                
+                    <div>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                    
+                </form>
+        </mat-step>
+        <mat-step [stepControl]="personalDataForm">
+            
+            <form [formGroup]="personalDataForm" >
+                <ng-template matStepLabel>Personal data of applicant</ng-template>
+                <p>
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label class="input-label"> 
+                            First Name
+                        </mat-label>
+                        <input matInput formControlName="firstName" required>
+                        <mat-error *ngIf="loanForm.controls['firstName']?.touched && loanForm.controls['email']?.invalid">
+                            <span *ngIf="loanForm.controls['firstName']?.errors ">
+                                This field is mandatory.
+                            </span>
+                            <span *ngIf="loanForm.controls['firstName']?.errors">This field is invalid.</span>
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label class="input-label"> 
+                            Last Name
+                        </mat-label>
+                        <input matInput formControlName="lastName" required>
+                        <mat-error *ngIf="loanForm.controls['lastName']?.touched && loanForm.controls['email']?.invalid">
+                            <span *ngIf="loanForm.controls['lastName']?.errors ">
+                                This field is mandatory.
+                            </span>
+                            <span *ngIf="loanForm.controls['lastName']?.errors">This field is invalid.</span>
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label class="input-label"> 
+                            Personal Code
+                        </mat-label>
+                        <input matInput formControlName="personalCode" required>
+                        <mat-error *ngIf="loanForm.controls['personalCode']?.touched && loanForm.controls['email']?.invalid">
+                            <span *ngIf="loanForm.controls['personalCode']?.errors ">
+                                This field is mandatory.
+                            </span>
+                            <span *ngIf="loanForm.controls['personalCode']?.errors">This field is invalid.</span>
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label class="input-label"> 
+                            Marital Status
+                        </mat-label>
+                        <input matInput formControlName="maritalStatus" required>
+                        <mat-error *ngIf="loanForm.controls['maritalStatus']?.touched && loanForm.controls['email']?.invalid">
+                            <span *ngIf="loanForm.controls['maritalStatus']?.errors ">
+                                This field is mandatory.
+                            </span>
+                            <span *ngIf="loanForm.controls['maritalStatus']?.errors">This field is invalid.</span>
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label class="input-label"> 
+                            Number of dependants in the family
+                        </mat-label>
+                        <input matInput formControlName="familyDependants" required>
+                        <mat-error *ngIf="loanForm.controls['familyDependants']?.touched && loanForm.controls['email']?.invalid">
+                            <span *ngIf="loanForm.controls['familyDependants']?.errors ">
+                                This field is mandatory.
+                            </span>
+                            <span *ngIf="loanForm.controls['familyDependants']?.errors">This field is invalid.</span>
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <div formGroupName="extendedData">
+                    <p>
+                        <mat-form-field class="form-field" appearance="outline">
+                            <mat-label class="input-label"> 
+                                Education
+                            </mat-label>
+                            <input matInput formControlName="education" required>
+                            <mat-error *ngIf="loanForm.controls['education']?.touched && loanForm.controls['email']?.invalid">
+                                <span *ngIf="loanForm.controls['education']?.errors ">
+                                    This field is mandatory.
+                                </span>
+                                <span *ngIf="loanForm.controls['education']?.errors">This field is invalid.</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                    <mat-form-field class="form-field" appearance="outline">
+                        <mat-label class="input-label"> 
+                            Status or job category
+                        </mat-label>
+                        <input matInput formControlName="statusCategory" required>
+                        <mat-error *ngIf="loanForm.controls['statusCategory']?.touched && loanForm.controls['email']?.invalid">
+                            <span *ngIf="loanForm.controls['statusCategory']?.errors ">
+                                This field is mandatory.
+                            </span>
+                            <span *ngIf="loanForm.controls['statusCategory']?.errors">This field is invalid.</span>
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+
+                </div>
+                <div formGroupName="coApplicants">
+                    <div class="example-button-container">
+                        <button mat-stroked-button color="accent" aria-label="Example icon button with a plus one icon">
+                          <mat-icon>plus_one</mat-icon>
+                            <span>Add Co-Applicant</span>
+                        </button>
+                      </div>
+                    <div formArrayName="coApplicants" *ngFor="let applicant of coApplicants;
+                      let i=index"
+                    >
+                        <mat-form-field class="form-field" appearance="outline">
+                            <mat-label class="input-label"> 
+                                Co Applicant
+                            </mat-label>
+                            <input matInput formControlName="i" required>
+                            
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+            </form>
+            <button mat-button [disabled]="!loanForm.valid && !personalDataForm.valid" (click)="submitLoanForm()">Submit</button>
+        
+        </mat-step>
+    
+                  
+    </mat-stepper>
+
+</div>
