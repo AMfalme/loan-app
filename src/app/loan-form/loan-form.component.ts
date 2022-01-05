@@ -36,6 +36,18 @@ export class LoanFormComponent implements OnInit {
 
   dynamicFormGroup: FormArray = new FormArray([]);
 
+  dynamicFormControlkeyValues!: Object;
+
+  HousePurchaseFormGroup: Object = {
+      purpose: ['', Validators.required],
+      propertyDetails: ['', Validators.required]
+  };
+  
+  HouseConstructionFormGroup: Object = {
+      purpose: ['', Validators.required],
+      purchasePrice: ['', Validators.required],
+      propertyDetails: ['', Validators.required]
+  };
   
 
   
@@ -91,14 +103,16 @@ export class LoanFormComponent implements OnInit {
         email: [null, [Validators.required, Validators.pattern(this.emailRegx)]],
       }),
       });
-  }
 
-  createDynamicFormGroup(): FormGroup {
-    return this.formBuilder.group({
-      purpose: ['', Validators.required],
-      propertyDetails: ['', Validators.required]
-    });
+      
+
   }
+  
+  createFormGroups(GroupList: Object) : FormGroup {
+    return this.formBuilder.group(GroupList);
+  } 
+
+  
 
   submitLoanForm() {
     if (!this.loanForm.valid) {
@@ -110,19 +124,28 @@ export class LoanFormComponent implements OnInit {
     }
     console.log(this.loanForm.value);
   }
+  
   get dynamicForms () {
     return this.loanForm.get('dynamicFormGroup') as FormArray;
   }
+
+  getControlsKeyValues: string[] = [];
+  
+  
   onSelectLoanType(e: any) {
+    this.dynamicForms.clear();
+    
     switch(e.value) {
       case 'Housing Purchasing':
         this.dynamicForms.push(
-          this.createDynamicFormGroup()
-        );
-        break;
+          this.createFormGroups(this.HousePurchaseFormGroup)
+          );
+          console.log(this.getControlsKeyValues);
+          this.getControlsKeyValues = Object.keys(this.HouseConstructionFormGroup);
+          break;
       case 'House Construction':
-        this.dynamicForms.push(
-          this.createDynamicFormGroup()
+            this.dynamicForms.push(
+              this.createFormGroups(this.HouseConstructionFormGroup)
         );
         break;
       case 'Exploring Laon possibilities':

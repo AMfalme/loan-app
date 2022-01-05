@@ -23,12 +23,16 @@
                         </mat-error>
                     </mat-form-field>
                 </p>
-                <div formArrayName="dynamicFormGroup" *ngFor="let loan of dynamicForms.controls;let i = index;">
-               
-                    <p [formGroupName]="i">
-                        <mat-form-field   appearance="outline">
-                            <mat-label class="input-label">Purpose more precisely</mat-label>
-                            <input matInput formControlName="purpose" type="text" required>
+                <div  class="dynamicFormGroup" formArrayName="dynamicFormGroup" *ngFor="let loan of dynamicForms.controls  | keyvalue; ;let i = index;">
+                   <div *ngIf="dynamicForms.controls" [formGroupName]="i">
+
+                        <p *ngFor="let control of getControlsKeyValues">
+                    
+                        <mat-form-field   appearance="outline" >
+                                
+                                <!-- {{value}} -->
+                                <mat-label class="input-label">Purpose more precisely</mat-label>
+                                <input matInput formControlName="purpose" type="text" required>
                             
                             <!-- <mat-error *ngIf="loanForm.controls['loanType']?.touched && loanForm.controls['loanType']?.invalid">
                                 <span *ngIf="loanForm.controls['loanType']?.errors ">
@@ -37,18 +41,10 @@
                                 <span *ngIf="loanForm.controls['loanType']?.errors">This field is invalid.</span>
                             </mat-error> -->
                         </mat-form-field>
-                        <mat-form-field  appearance="outline">
-                            <mat-label class="input-label">Property Details</mat-label>
-                            <input matInput formControlName="purpose" type="text" required>
-                            
-                            <!-- <mat-error *ngIf="loanForm.controls['loanType']?.touched && loanForm.controls['loanType']?.invalid">
-                                <span *ngIf="loanForm.controls['loanType']?.errors ">
-                                    This field is mandatory.
-                                </span>
-                                <span *ngIf="loanForm.controls['loanType']?.errors">This field is invalid.</span>
-                            </mat-error> -->
-                        </mat-form-field>
+                       
+                    
                     </p>
+                </div>
                 </div>
                 <p>
                     <mat-form-field appearance="outline" floatLabel="always">
@@ -100,6 +96,7 @@
                     <div>
                         <button mat-button matStepperNext>Next</button>
                     </div>
+                    
                 </form>
         </mat-step>
         <mat-step [stepControl]="personalDataForm">
