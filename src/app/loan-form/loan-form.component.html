@@ -6,6 +6,9 @@
             <form [formGroup]="loanForm">
                 <ng-template matStepLabel>Loan Application</ng-template>
                 <p>
+                    <app-select-form-field [selectControl]="loanForm.controls['loanType']" ></app-select-form-field>
+                </p>
+                <p>
                     <mat-form-field appearance="outline">
                         <mat-label class="input-label">Loan Purpose</mat-label>
                         <mat-select (selectionChange)="onSelectLoanType($event)" formControlName="loanType"  name="loanType">

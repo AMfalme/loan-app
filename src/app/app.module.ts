@@ -13,6 +13,7 @@ import {MatInputModule} from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatIconModule} from '@angular/material/icon';
+import { SelectFormFieldComponent } from './select-form-field/select-form-field.component';
 
 
 
@@ -21,7 +22,8 @@ import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
-    LoanFormComponent
+    LoanFormComponent,
+    SelectFormFieldComponent
   ],
   imports: [
     BrowserModule,
