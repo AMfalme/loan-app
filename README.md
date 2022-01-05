@@ -3,6 +3,9 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.0.
 
 ## Development server
+This project runs using node version `v17.2.0`
+
+if you are using nvm to manage your node versions, run `node use v17.2.0`
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 

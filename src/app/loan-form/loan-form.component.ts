@@ -49,6 +49,12 @@ export class LoanFormComponent implements OnInit {
       propertyDetails: ['', Validators.required]
   };
   
+  HouseRenovationtionFormGroup: Object = {
+      description: ['', Validators.required],
+      renovationAmount: ['', Validators.required],
+      houseDetails: ['', Validators.required]
+  };
+  
   LandPurchaseFormGroup: Object = {
       description: ['', Validators.required],
       purchasePrice: ['', Validators.required],
@@ -62,7 +68,7 @@ export class LoanFormComponent implements OnInit {
     // 'Exploring Laon possibilities',
     'Purchasing of land plot',
     // 'Home Exchange',
-    // 'Housing renovation or repair',
+    'Housing renovation or repair',
     // 'Change in loan agreement'  
   ];
 
@@ -164,8 +170,15 @@ export class LoanFormComponent implements OnInit {
       case 'Exploring Laon possibilities':
         console.log(this.dynamicFormGroup);
         break;
-      case 'Home Exchange':
-      case 'Housing renovation or repair':
+        case 'Housing renovation or repair':
+          this.dynamicForms.push(
+            this.createFormGroups(this.HouseRenovationtionFormGroup)
+            );
+            this.getControlsKeyValues = Object.keys(this.HouseRenovationtionFormGroup);
+            // let item = this.loanForm.get('additional')?.value[0];
+            console.log( this.LandPurchaseFormGroup);
+            break;
+        case 'Home Exchange':
       case 'Change in loan agreement':
       
     } 
