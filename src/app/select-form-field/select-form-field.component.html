@@ -1,17 +1,20 @@
 
-    <mat-form-field appearance="outline">
-        <mat-label class="input-label">Loan Purpose</mat-label>
-        <mat-select (selectionChange)="onSelectLoanType($event)" formControlName="loanType"  name="loanType">
-                <mat-option>--</mat-option>
+ <p [formGroup]="loanForm">
 
-                <mat-option *ngFor="let loan of loanOptions" [value]="loan">
-                {{loan}}
+     <mat-form-field appearance="outline">
+         <mat-label class="input-label">Loan Purpose</mat-label>
+         <mat-select (selectionChange)="onSelectLoanType($event)" [formControlName]="selectControl"  name="loanType">
+             <mat-option>--</mat-option>
+             
+                <mat-option *ngFor="let loan of selectOptions" [value]="loan">
+                    {{loan}}
                 </mat-option>
-        </mat-select>
-        <mat-error *ngIf="checkValidity">
-            <span *ngIf="selectControl?.errors ">
+            </mat-select>
+            <mat-error >
+            <span >
                 This field is mandatory.
             </span>
-            <span *ngIf="selectControl?.errors">This field is invalid.</span>
+            <span >This field is invalid.</span>
         </mat-error>
     </mat-form-field>
+</p>

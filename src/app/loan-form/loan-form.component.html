@@ -6,7 +6,9 @@
             <form [formGroup]="loanForm">
                 <ng-template matStepLabel>Loan Application</ng-template>
                 <p>
-                    <app-select-form-field [selectControl]="loanForm.controls['loanType']" ></app-select-form-field>
+                    <app-select-form-field [formGroup]="loanForm" selectControl="loanType" [selectOptions]="loanOptions">
+                        
+                    </app-select-form-field>
                 </p>
                 <p>
                     <mat-form-field appearance="outline">

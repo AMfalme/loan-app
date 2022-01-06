@@ -84,7 +84,6 @@ export class LoanFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.dynamicFormGroup);
       
     this.loanForm = this.formBuilder.group({
       loanType: [null, [Validators.required, ]],
@@ -140,6 +139,7 @@ export class LoanFormComponent implements OnInit {
     return this.loanForm.get('dynamicFormGroup') as FormArray;
   }
 
+  getLoanFormLoanType = this.loanForm.controls['LoanType'];
   getControlsKeyValues: string[] = [];
   
   

@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Component, Input, OnInit, Output, EventEmitter, } from '@angular/core';
+import { ControlContainer, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -8,26 +8,22 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./select-form-field.component.scss']
 })
 export class SelectFormFieldComponent implements OnInit {
+  public loanForm: FormGroup = new FormGroup({});
 
-  constructor() { }
+  
+  constructor(private controlContainer: ControlContainer) { 
+    this.loanForm = <FormGroup>this.controlContainer.control;
+  }
 
 
   @Output() onSelect = new EventEmitter();
 
 
-  loanOptions: string[] = [
-    'Housing Purchasing', 
-    'House Construction', 
-    // 'Exploring Laon possibilities',
-    'Purchasing of land plot',
-    // 'Home Exchange',
-    'Housing renovation or repair',
-    // 'Change in loan agreement'  
-  ];
+  @Input()
+  selectOptions: string[] = [];
+  @Input()
+  selectControl: string = '';
 
-  @Input() selectControl!: FormControl;
-  @Input() selectOptions!: [];
-  
   getControlsKeyValues: string[] = [];
 
   HousePurchaseFormGroup: Object = {
@@ -55,10 +51,13 @@ LandPurchaseFormGroup: Object = {
 
 
   ngOnInit(): void {
+    this.loanForm = <FormGroup>this.loanForm?.controls['loanType'];
+    console.log("we are here");
+  
   }
 
   checkValidity() {
-    return this.selectControl?.touched && this.selectControl?.invalid;
+    // return this.selectControl?.touched && this.selectControl?.invalid;
   }
 
   onSelectLoanType(e: any) {
