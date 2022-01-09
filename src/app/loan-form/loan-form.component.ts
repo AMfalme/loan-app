@@ -17,7 +17,7 @@ export interface CoApplicant {
 export class LoanFormComponent implements OnInit {
   
   loanForm: FormGroup = new FormGroup({
-    loanType: new FormControl(''),
+    loanType: new FormGroup({}),
     loanPeriod: new FormControl(''),
     downPaymentAmount: new FormControl(''),
     loanAmount: new FormControl(''),
@@ -86,7 +86,9 @@ export class LoanFormComponent implements OnInit {
   ngOnInit() {
       
     this.loanForm = this.formBuilder.group({
-      loanType: [null, [Validators.required, ]],
+      loanType: this.formBuilder.group(
+       { loanTypeDesc: [null, [Validators.required, ]],
+       }),
       loanPeriod: [null, Validators.required],
       downPaymentAmount: [null, Validators.required],
       loanAmount: [null, Validators.required],
