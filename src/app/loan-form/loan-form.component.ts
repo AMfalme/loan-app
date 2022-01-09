@@ -17,7 +17,9 @@ export interface CoApplicant {
 export class LoanFormComponent implements OnInit {
   
   loanForm: FormGroup = new FormGroup({
-    loanType: new FormGroup({}),
+    loanType: new FormGroup({
+      loanTypeDesc: new FormControl('')
+    }),
     loanPeriod: new FormControl(''),
     downPaymentAmount: new FormControl(''),
     loanAmount: new FormControl(''),

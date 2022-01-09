@@ -1,9 +1,9 @@
 
- <p [formGroup]="loanForm">
+ <p [formGroup]="loanType">
 
      <mat-form-field appearance="outline">
          <mat-label class="input-label">Loan Purpose</mat-label>
-         <mat-select (selectionChange)="onSelectLoanType($event)" [formControlName]="selectControl"  name="loanType">
+         <mat-select (selectionChange)="onSelectLoanType($event)" formControlName="loanTypeDesc" >
              <mat-option>--</mat-option>
              
                 <mat-option *ngFor="let loan of selectOptions" [value]="loan">

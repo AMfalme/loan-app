@@ -6,27 +6,9 @@
             <form [formGroup]="loanForm">
                 <ng-template matStepLabel>Loan Application</ng-template>
                 <p>
-                    <app-select-form-field [formGroup]="loanForm" selectControl="loanType" [selectOptions]="loanOptions">
+                    <app-select-form-field formGroupName="loanType" [selectOptions]="loanOptions" (onSelect)="onSelectLoanType($event)">
                         
                     </app-select-form-field>
-                </p>
-                <p>
-                    <mat-form-field appearance="outline">
-                        <mat-label class="input-label">Loan Purpose</mat-label>
-                        <mat-select (selectionChange)="onSelectLoanType($event)" formControlName="loanType"  name="loanType">
-                                <mat-option>--</mat-option>
-                
-                                <mat-option *ngFor="let loan of loanOptions" [value]="loan">
-                                {{loan}}
-                                </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="loanForm.controls['loanType']?.touched && loanForm.controls['loanType']?.invalid">
-                            <span *ngIf="loanForm.controls['loanType']?.errors ">
-                                This field is mandatory.
-                            </span>
-                            <span *ngIf="loanForm.controls['loanType']?.errors">This field is invalid.</span>
-                        </mat-error>
-                    </mat-form-field>
                 </p>
                 <div  class="dynamicFormGroup" formArrayName="dynamicFormGroup" *ngFor="let loan of dynamicForms.controls  | keyvalue; ;let i = index;">
                    <div *ngIf="dynamicForms.controls" [formGroupName]="i">
