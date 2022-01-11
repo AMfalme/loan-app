@@ -24,6 +24,7 @@ export class LoanFormComponent implements OnInit {
     downPaymentAmount: new FormControl(''),
     loanAmount: new FormControl(''),
     discountCode: new FormControl(''),
+    dynamicFormGroup: new FormArray([])
   });
 
   personalDataForm: FormGroup = new FormGroup({
@@ -76,6 +77,7 @@ export class LoanFormComponent implements OnInit {
 
   loanPeriod : number [] = Array.from(Array(30).keys())
   coApplicants: CoApplicant[] = [];
+  payLoad: string | undefined;
   get CoApplicants (): FormArray {
     return this.personalDataForm.get('coApplicants') as FormArray;
   }
@@ -89,11 +91,11 @@ export class LoanFormComponent implements OnInit {
       
     this.loanForm = this.formBuilder.group({
       loanType: this.formBuilder.group(
-       { loanTypeDesc: [null, [Validators.required, ]],
+       { loanTypeDesc: ['', [Validators.required, ]],
        }),
       loanPeriod: [null, Validators.required],
       downPaymentAmount: [null, Validators.required],
-      loanAmount: [null, Validators.required],
+      loanAmount: [null, [Validators.required, Validators.min(1000)]],
       dynamicFormGroup: this.formBuilder.array([])
       
     });
@@ -122,8 +124,8 @@ export class LoanFormComponent implements OnInit {
 
   }
   
-  createFormGroups(GroupList: Object) : FormGroup {
-    return this.formBuilder.group(GroupList);
+  addFormControls(GroupList: FormControl[])  {
+    
   } 
 
   
@@ -137,51 +139,59 @@ export class LoanFormComponent implements OnInit {
       return;
     }
     console.log(this.loanForm.value);
+    this.payLoad = JSON.stringify(this.loanForm.getRawValue());
+    console.log(this.payLoad);
+    return this.payLoad;
   }
   
   get dynamicForms () {
-    return this.loanForm.get('dynamicFormGroup') as FormArray;
+    return this.loanForm.controls['dynamicFormGroup'] as FormArray;
   }
 
   getLoanFormLoanType = this.loanForm.controls['LoanType'];
-  getControlsKeyValues: string[] = [];
+  getControlsKeyValues: [string, any][] = [['', '']];
   
   
   onSelectLoanType(e: any) {
     this.dynamicForms.clear();
     
+    console.log(this.loanForm.controls);
+    console.log(this.dynamicForms);
     switch(e.value) {
       case 'Housing Purchasing':
-        this.dynamicForms.push(
-          this.createFormGroups(this.HousePurchaseFormGroup)
+        this.formBuilder.array([])
+        this.dynamicForms.push(new FormControl('')
+          // this.createFormGroups(this.HousePurchaseFormGroup)
         );
-        this.getControlsKeyValues = Object.keys(this.HousePurchaseFormGroup);
+        
+        this.getControlsKeyValues = Object.entries(this.HousePurchaseFormGroup);
+        console.log(this.getControlsKeyValues);
         break;
       case 'House Construction':
-        this.dynamicForms.push(
-          this.createFormGroups(this.HouseConstructionFormGroup)
+        this.dynamicForms.push(new FormControl('')
+          // this.createFormGroups(this.HouseConstructionFormGroup)
         );
-        this.getControlsKeyValues = Object.keys(this.HouseConstructionFormGroup);
+        // this.getControlsKeyValues = Object.keys(this.HouseConstructionFormGroup);
         break;
       case 'Purchasing of land plot':
-        this.dynamicForms.push(
-          this.createFormGroups(this.LandPurchaseFormGroup)
+        this.dynamicForms.push(new FormControl('')
+          // this.createFormGroups(this.LandPurchaseFormGroup)
           );
-          this.getControlsKeyValues = Object.keys(this.LandPurchaseFormGroup);
+          // this.getControlsKeyValues = Object.keys(this.LandPurchaseFormGroup);
           // let item = this.loanForm.get('additional')?.value[0];
           console.log( this.LandPurchaseFormGroup);
           break;
       case 'Exploring Laon possibilities':
         console.log(this.dynamicFormGroup);
         break;
-        case 'Housing renovation or repair':
-          this.dynamicForms.push(
-            this.createFormGroups(this.HouseRenovationtionFormGroup)
-            );
-            this.getControlsKeyValues = Object.keys(this.HouseRenovationtionFormGroup);
-            // let item = this.loanForm.get('additional')?.value[0];
-            console.log( this.LandPurchaseFormGroup);
-            break;
+      case 'Housing renovation or repair':
+        this.dynamicForms.push(new FormControl('')
+          // this.createFormGroups(this.HouseRenovationtionFormGroup)
+          );
+          // this.getControlsKeyValues = Object.keys(this.HouseRenovationtionFormGroup);
+          // let item = this.loanForm.get('additional')?.value[0];
+          console.log( this.LandPurchaseFormGroup);
+          break;
         case 'Home Exchange':
       case 'Change in loan agreement':
       

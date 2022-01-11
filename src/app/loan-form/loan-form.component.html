@@ -10,7 +10,7 @@
                         
                     </app-select-form-field>
                 </p>
-                <div  class="dynamicFormGroup" formArrayName="dynamicFormGroup" *ngFor="let loan of dynamicForms.controls  | keyvalue; ;let i = index;">
+                <div  class="dynamicFormGroup" formArrayName="dynamicFormGroup" *ngFor="let loan of dynamicForms.controls| keyvalue; ;let i = index;">
                    <div *ngIf="dynamicForms.controls" [formGroupName]="i">
 
                         <p *ngFor="let control of getControlsKeyValues">
@@ -21,12 +21,9 @@
                                 <mat-label class="input-label">{{control}}</mat-label>
                                 <input matInput formControlName={{control}} type="text" required>
                             
-                            <!-- <mat-error *ngIf="loanForm.controls['loanType']?.touched && loanForm.controls['loanType']?.invalid">
-                                <span *ngIf="loanForm.controls['loanType']?.errors ">
-                                    This field is mandatory.
-                                </span>
-                                <span *ngIf="loanForm.controls['loanType']?.errors">This field is invalid.</span>
-                            </mat-error> -->
+                            <app-custom-error-component [displayErrotState]="">
+
+                            </app-custom-error-component>
                         </mat-form-field>
                        
                     
@@ -71,11 +68,11 @@
                             Loan amount
                         </mat-label>
                         <input matInput formControlName="loanAmount" required>
-                        <mat-error *ngIf="loanForm.controls['email']?.touched && loanForm.controls['email']?.invalid">
-                            <span *ngIf="loanForm.controls['email']?.errors ">
+                        <mat-error *ngIf="loanForm.controls['loanAmount']?.touched && loanForm.controls['email']?.invalid">
+                            <span *ngIf="loanForm.controls['loanAmount']?.errors ">
                                 This field is mandatory.
                             </span>
-                            <span *ngIf="loanForm.controls['email']?.errors">This field is invalid.</span>
+                            <span *ngIf="loanForm.controls['loanAmount']?.errors">This field is invalid.</span>
                         </mat-error>
                     </mat-form-field>
                 </p>

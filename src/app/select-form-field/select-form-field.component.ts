@@ -29,28 +29,7 @@ export class SelectFormFieldComponent implements OnInit {
 
   getControlsKeyValues: string[] = [];
 
-  HousePurchaseFormGroup: Object = {
-    descrption: ['', Validators.required],
-    propertyDetails: ['', Validators.required]
-};
 
-HouseConstructionFormGroup: Object = {
-    description: ['', Validators.required],
-    purchasePrice: ['', Validators.required],
-    propertyDetails: ['', Validators.required]
-};
-
-HouseRenovationtionFormGroup: Object = {
-    description: ['', Validators.required],
-    renovationAmount: ['', Validators.required],
-    houseDetails: ['', Validators.required]
-};
-
-LandPurchaseFormGroup: Object = {
-    description: ['', Validators.required],
-    purchasePrice: ['', Validators.required],
-    landDetails: ['', Validators.required]
-};
 
 
   ngOnInit(): void {

@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatIconModule} from '@angular/material/icon';
 import { SelectFormFieldComponent } from './select-form-field/select-form-field.component';
+import { CustomErrorComponentComponent } from './custom-error-component/custom-error-component.component';
 
 
 
@@ -23,7 +24,8 @@ import { SelectFormFieldComponent } from './select-form-field/select-form-field.
   declarations: [
     AppComponent,
     LoanFormComponent,
-    SelectFormFieldComponent
+    SelectFormFieldComponent,
+    CustomErrorComponentComponent
   ],
   imports: [
     BrowserModule,
