@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { FormGroup } from '@angular/forms';
 
-import { FormFieldBase } from '../form-field-base';
+import { FormFieldBase } from '../form-questions/form-field-base';
 
 @Component({
   selector: 'app-dynamic-form-field',

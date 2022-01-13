@@ -17,7 +17,6 @@ import { CustomErrorComponentComponent } from './custom-error-component/custom-e
 
 import { LoanFormComponent } from './loan-form/loan-form.component';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
-import { DynamicFormQuestionComponent } from './dynamic-form-question/dynamic-form-question.component';
 
 
 
@@ -28,7 +27,6 @@ import { DynamicFormQuestionComponent } from './dynamic-form-question/dynamic-fo
     SelectFormFieldComponent,
     CustomErrorComponentComponent,
     DynamicFormComponent,
-    DynamicFormQuestionComponent
   ],
   imports: [
     BrowserModule,
